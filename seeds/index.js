@@ -26,11 +26,13 @@ const seedDB = async () => {
       const random1000 = Math.floor(Math.random() * 1000);
       const price = Math.floor(Math.random() * 50 ) + 10;
       const camp = new Campground({
+          author:'61a4c10b2b8691bde5517902',
           location: `${cities[random1000].city}, ${cities[random1000].state}`,
           title: `${sample(descriptors)} ${sample(places)}`,
           image: 'https://source.unsplash.com/collection/483251/1600x900',
           description: 'Camping is a fun recreational activity that allows you to enjoy the outdoors',
           price
+
         })
          await camp.save();
     }
