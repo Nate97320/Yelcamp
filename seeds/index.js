@@ -29,8 +29,18 @@ const seedDB = async () => {
           author:'61a4c10b2b8691bde5517902',
           location: `${cities[random1000].city}, ${cities[random1000].state}`,
           title: `${sample(descriptors)} ${sample(places)}`,
-          image: 'https://source.unsplash.com/collection/483251/1600x900',
           description: 'Camping is a fun recreational activity that allows you to enjoy the outdoors',
+          geometry:  { type: 'Point', coordinates: [ -113.1331, 47.0202 ] },
+          images: [
+              {
+                 url: 'https://res.cloudinary.com/dl0h1jiii/image/upload/v1638956063/Yelcamp/fns4eznd7bqsvnwgel0g.jpg',
+                 filename: 'Yelcamp/fns4eznd7bqsvnwgel0g'
+              },
+              {
+                 url: 'https://res.cloudinary.com/dl0h1jiii/image/upload/v1638956151/Yelcamp/lcxhalcu7oawowd2f2v8.jpg',
+                 filename: 'Yelcamp/lcxhalcu7oawowd2f2v8'
+              }
+             ],
           price
 
         })
