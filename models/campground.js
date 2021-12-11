@@ -40,6 +40,10 @@ const campgroundschema = new Schema({
     }]
 });
 
+campgroundschema.virtual('properties.popUpMarkup').get(function() {
+   return `<a href ="/campgrounds/${this_id}"> ${this.title}</a>`
+});
+
 campgroundschema.post('findOneAndDelete', async function(doc) {
   if (doc) {
           await Review.deleteMany({

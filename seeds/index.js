@@ -22,7 +22,7 @@ const sample = array => array[Math.floor(Math.random() * array.length)];
 
 const seedDB = async () => {
   await Campground.deleteMany({});
-  for (let i=0; i<50; i++) {
+  for (let i=0; i<150; i++) {
       const random1000 = Math.floor(Math.random() * 1000);
       const price = Math.floor(Math.random() * 50 ) + 10;
       const camp = new Campground({
@@ -30,7 +30,13 @@ const seedDB = async () => {
           location: `${cities[random1000].city}, ${cities[random1000].state}`,
           title: `${sample(descriptors)} ${sample(places)}`,
           description: 'Camping is a fun recreational activity that allows you to enjoy the outdoors',
-          geometry:  { type: 'Point', coordinates: [ -113.1331, 47.0202 ] },
+          geometry:  {
+             type: 'Point',
+             coordinates: [
+               cities[random1000].longitude,
+               cities[random1000].latitude
+             ]
+           },
           images: [
               {
                  url: 'https://res.cloudinary.com/dl0h1jiii/image/upload/v1638956063/Yelcamp/fns4eznd7bqsvnwgel0g.jpg',

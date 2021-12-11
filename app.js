@@ -4,7 +4,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 console.log(process.env.API_SECRET);
-console.log(process.env.API_KEY);
+// console.log(process.env.API_KEY);
 
 const express = require('express');
 const path = require('path');
@@ -19,6 +19,8 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const Review = require('./models/reviews');
+const mongoSanitize = require('express-mongo-sanitize');
+
 
 const userRoutes = require('./routes/users')
 const campgroundRoutes = require('./routes/campgrounds');
@@ -41,14 +43,18 @@ db.once('open', ()=> {
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
+
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(mongoSanitize())
+
 
 
 
 
 const sessionconfig = {
+    name: 'session',
     secret: 'lalaland',
     resave: false,
     saveUninitialized: true,
@@ -72,7 +78,7 @@ passport.deserializeUser(User.deserializeUser());
 
 
 app.use((req, res, next) => {
-    console.log(req.session);
+    console.log(req.query);
     res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');

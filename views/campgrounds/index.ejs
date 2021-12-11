@@ -1,20 +1,28 @@
 <% layout('layouts/boilerplate')%>
 
+<div id="cluster-map" ></div>
+<script>
+  const mapToken = 'pk.eyJ1IjoibmF0ZTM2OSIsImEiOiJja3d6N2M0NTQwdmI4MnFtbnNhMTZhdTJsIn0.zxlCwA7hCjMCY6eJ9xpHJw'
+  const campgrounds = {features: <%-JSON.stringify(campgrounds) %>}
+</script>
+<script src="/javascripts/clusterMap.js"></script>
+
+
 <h1>All Campgrounds</h1>
 <div>
     <a href="/campgrounds/new">Add Campground</a>
 </div>
 <% for (let campground of campgrounds){%>
-<div class="card" mb-3>
+<div class="card mb-3" >
     <div class="row">
         <div class="col-md-4">
             <% if(campground.images.length) {%>
             <img class="img-fluid" alt="" src="<%=campground.images[0].url%>">
           <% } else { %>
-            <img class="img-fluid" alt="" src="'https://res.cloudinary.com/dl0h1jiii/image/upload/v1639084616/Yelcamp/aa1k1pmlkzbhb3elx81y.jpg">
+            <img class="img-fluid" alt="" src="https://res.cloudinary.com/dl0h1jiii/image/upload/v1639084616/Yelcamp/aa1k1pmlkzbhb3elx81y.jpg">
             <% } %>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="card-body">
                 <h5 class="card-title"><%= campground.title %> </h5>
                 <p class="card-text"><%= campground.description %></p>
